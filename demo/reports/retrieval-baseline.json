@@ -1,0 +1,824 @@
+{
+  "suite": "retrieval",
+  "status": "ok",
+  "generated_at": "2026-11-18T19:13:23+08:00",
+  "retriever": {
+    "name": "gameconfig_copilot.rag.retriever.Retriever",
+    "top_k": 10,
+    "candidate_k": 30,
+    "fusion_k": 60,
+    "max_results": 15,
+    "sparse_backend": "bm25s",
+    "dense_backend": "noop",
+    "dense_available": false
+  },
+  "metrics": {
+    "recall@1": 0.375,
+    "hit@1": 0.6,
+    "recall@5": 0.775,
+    "hit@5": 0.95,
+    "recall@10": 0.875,
+    "hit@10": 0.95,
+    "mrr@10": 0.7625,
+    "ndcg@10": 0.7382,
+    "source_type_precision@10": 0.73
+  },
+  "config": {
+    "top_k": 10,
+    "ks": [
+      1,
+      5,
+      10
+    ],
+    "mrr_cutoff": 10,
+    "n_queries": 20
+  },
+  "qrels": {
+    "path": "data/golden/qrels.json",
+    "version": 2,
+    "chunk_id_scheme": {
+      "format": "wiki:<stem>:s<节序号 2 位>:w<窗口序号 2 位> | task:<task_id>[#objectives|#rewards|#branches] | constraint:<约束 ID>",
+      "status": "aligned_with_rag_chunker"
+    },
+    "distribution": {
+      "count": 20,
+      "relevant_labels": 34,
+      "multi_label_queries": 14,
+      "by_intent": {
+        "constraint_lookup": 2,
+        "economy_lookup": 1,
+        "entity_lookup": 7,
+        "npc_profile": 4,
+        "quest_rule": 3,
+        "similar_task": 3
+      },
+      "by_difficulty": {
+        "easy": 7,
+        "hard": 3,
+        "medium": 10
+      },
+      "by_source_type": {
+        "constraint": 5,
+        "task": 3,
+        "wiki": 16
+      }
+    }
+  },
+  "per_query": [
+    {
+      "qid": "Q01",
+      "query": "星港议会为什么能封区，他们的信条是什么",
+      "difficulty": "easy",
+      "intent": "entity_lookup",
+      "filters": {},
+      "first_relevant_rank": 1,
+      "retrieved": [
+        "wiki:world_overview:s04:w01",
+        "wiki:world_overview:s09:w01",
+        "wiki:npc_profiles:s03:w01",
+        "wiki:npc_profiles:s04:w01",
+        "wiki:npc_profiles:s07:w01",
+        "wiki:world_overview:s08:w01",
+        "wiki:npc_profiles:s05:w01",
+        "wiki:world_overview:s06:w01",
+        "wiki:world_overview:s05:w01",
+        "wiki:npc_profiles:s02:w01"
+      ],
+      "relevant": [
+        "wiki:world_overview:s04:w01",
+        "wiki:world_overview:s03:w01"
+      ],
+      "recall": {
+        "recall@1": 0.5,
+        "recall@5": 0.5,
+        "recall@10": 0.5
+      },
+      "hit": {
+        "hit@1": true,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 1.0,
+      "ndcg": 0.8262,
+      "source_type_precision": 1.0
+    },
+    {
+      "qid": "Q02",
+      "query": "深井教团为什么被定为非法结社",
+      "difficulty": "easy",
+      "intent": "entity_lookup",
+      "filters": {},
+      "first_relevant_rank": 2,
+      "retrieved": [
+        "wiki:world_overview:s09:w01",
+        "wiki:world_overview:s06:w01",
+        "wiki:npc_profiles:s05:w01",
+        "wiki:world_overview:s08:w01",
+        "wiki:npc_profiles:s04:w01",
+        "constraint:C_DIALOGUE_FORMAT_01",
+        "wiki:world_overview:s07:w01",
+        "wiki:npc_profiles:s07:w01",
+        "wiki:quest_design_spec:s06:w02",
+        "wiki:world_overview:s05:w01"
+      ],
+      "relevant": [
+        "wiki:world_overview:s06:w01",
+        "wiki:world_overview:s03:w01"
+      ],
+      "recall": {
+        "recall@1": 0.0,
+        "recall@5": 0.5,
+        "recall@10": 0.5
+      },
+      "hit": {
+        "hit@1": false,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 0.5,
+      "ndcg": 0.5213,
+      "source_type_precision": 0.9
+    },
+    {
+      "qid": "Q03",
+      "query": "矿洞分几层，通风机停了要怎么办",
+      "difficulty": "medium",
+      "intent": "entity_lookup",
+      "filters": {},
+      "first_relevant_rank": 1,
+      "retrieved": [
+        "wiki:world_overview:s07:w01",
+        "wiki:world_overview:s09:w01",
+        "task:T_MAIN_0102",
+        "constraint:C_AREA_ENUM_01",
+        "wiki:npc_profiles:s05:w01",
+        "task:T_MAIN_0102#objectives",
+        "task:T_SIDE_0214#objectives",
+        "wiki:npc_profiles:s02:w01",
+        "task:T_MAIN_0102#branches",
+        "task:T_SIDE_0216#objectives"
+      ],
+      "relevant": [
+        "wiki:world_overview:s07:w01"
+      ],
+      "recall": {
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": true,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "source_type_precision": 0.4
+    },
+    {
+      "qid": "Q04",
+      "query": "荒原哨站的水塔怎么配水，能补给什么",
+      "difficulty": "medium",
+      "intent": "entity_lookup",
+      "filters": {},
+      "first_relevant_rank": 1,
+      "retrieved": [
+        "wiki:world_overview:s07:w01",
+        "task:T_SIDE_0214#objectives",
+        "wiki:world_overview:s09:w01",
+        "constraint:C_AREA_ENUM_01",
+        "wiki:npc_profiles:s06:w01",
+        "task:T_SIDE_0214#branches",
+        "task:T_SIDE_0214",
+        "task:T_SIDE_0214#rewards",
+        "task:T_DAILY_0302#objectives",
+        "wiki:npc_profiles:s05:w01"
+      ],
+      "relevant": [
+        "wiki:world_overview:s07:w01"
+      ],
+      "recall": {
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": true,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "source_type_precision": 0.4
+    },
+    {
+      "qid": "Q05",
+      "query": "金币奖励为什么必须封顶，超发会有什么后果",
+      "difficulty": "hard",
+      "intent": "economy_lookup",
+      "filters": {},
+      "first_relevant_rank": 1,
+      "retrieved": [
+        "wiki:world_overview:s08:w01",
+        "constraint:C_REWARD_GOLD_01",
+        "constraint:C_REWARD_GOLD_MIN_01",
+        "constraint:C_REWARD_EXP_01",
+        "wiki:npc_profiles:s05:w01",
+        "wiki:npc_profiles:s04:w01",
+        "wiki:npc_profiles:s02:w01",
+        "wiki:quest_design_spec:s03:w01",
+        "constraint:C_ACTIVITY_STACK_LIMIT_01",
+        "constraint:C_REWARD_EXP_MIN_01"
+      ],
+      "relevant": [
+        "wiki:world_overview:s08:w01",
+        "constraint:C_REWARD_GOLD_01"
+      ],
+      "recall": {
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": true,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "source_type_precision": 1.0
+    },
+    {
+      "qid": "Q06",
+      "query": "星港城的上环中环下环分别有什么",
+      "difficulty": "medium",
+      "intent": "entity_lookup",
+      "filters": {},
+      "first_relevant_rank": 2,
+      "retrieved": [
+        "wiki:world_overview:s09:w01",
+        "wiki:world_overview:s02:w01",
+        "wiki:npc_profiles:s04:w01",
+        "wiki:npc_profiles:s03:w01",
+        "constraint:C_AREA_ENUM_01",
+        "wiki:world_overview:s03:w01",
+        "wiki:world_overview:s08:w01",
+        "constraint:C_REWARD_GOLD_01",
+        "wiki:world_overview:s05:w01",
+        "wiki:world_overview:s06:w01"
+      ],
+      "relevant": [
+        "wiki:world_overview:s02:w01"
+      ],
+      "recall": {
+        "recall@1": 0.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": false,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 0.5,
+      "ndcg": 0.6309,
+      "source_type_precision": 0.8
+    },
+    {
+      "qid": "Q07",
+      "query": "深井萤石在哪一层出产，稀有吗",
+      "difficulty": "medium",
+      "intent": "entity_lookup",
+      "filters": {},
+      "first_relevant_rank": 1,
+      "retrieved": [
+        "wiki:world_overview:s09:w01",
+        "wiki:npc_profiles:s05:w01",
+        "wiki:world_overview:s07:w01",
+        "task:T_DAILY_0303#objectives",
+        "task:T_SIDE_0214#rewards",
+        "task:T_SIDE_0216#objectives",
+        "task:T_MAIN_0103#objectives",
+        "wiki:world_overview:s06:w01",
+        "task:T_DAILY_0303",
+        "task:T_SIDE_0214"
+      ],
+      "relevant": [
+        "wiki:world_overview:s07:w01",
+        "wiki:world_overview:s09:w01"
+      ],
+      "recall": {
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": true,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 1.0,
+      "ndcg": 0.6885,
+      "source_type_precision": 0.4
+    },
+    {
+      "qid": "Q08",
+      "query": "实体索引里有哪些势力和地点 ID",
+      "difficulty": "easy",
+      "intent": "entity_lookup",
+      "filters": {},
+      "first_relevant_rank": null,
+      "retrieved": [
+        "wiki:world_overview:s01:w01",
+        "wiki:quest_design_spec:s06:w01",
+        "wiki:quest_design_spec:s05:w01",
+        "wiki:npc_profiles:s02:w01",
+        "wiki:npc_profiles:s01:w01",
+        "constraint:C_TASK_ID_UNIQUE_01",
+        "constraint:C_AREA_EXISTS_01",
+        "constraint:C_DIALOGUE_FORMAT_01",
+        "wiki:npc_profiles:s07:w01",
+        "wiki:quest_design_spec:s02:w01"
+      ],
+      "relevant": [
+        "wiki:world_overview:s09:w01"
+      ],
+      "recall": {
+        "recall@1": 0.0,
+        "recall@5": 0.0,
+        "recall@10": 0.0
+      },
+      "hit": {
+        "hit@1": false,
+        "hit@5": false,
+        "hit@10": false
+      },
+      "mrr": 0.0,
+      "ndcg": 0.0,
+      "source_type_precision": 0.7
+    },
+    {
+      "qid": "Q09",
+      "query": "铁匠老陈说话是什么语气，有哪些行话",
+      "difficulty": "easy",
+      "intent": "npc_profile",
+      "filters": {},
+      "first_relevant_rank": 2,
+      "retrieved": [
+        "wiki:npc_profiles:s07:w01",
+        "wiki:npc_profiles:s04:w01",
+        "wiki:npc_profiles:s02:w01",
+        "task:T_SIDE_0213#objectives",
+        "task:T_SIDE_0213",
+        "task:T_SIDE_0213#branches",
+        "task:T_SIDE_0213#rewards",
+        "wiki:npc_profiles:s01:w01",
+        "task:T_MAIN_0101#objectives",
+        "wiki:npc_profiles:s06:w01"
+      ],
+      "relevant": [
+        "wiki:npc_profiles:s04:w01",
+        "wiki:npc_profiles:s02:w01"
+      ],
+      "recall": {
+        "recall@1": 0.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": false,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 0.5,
+      "ndcg": 0.659,
+      "source_type_precision": 0.5
+    },
+    {
+      "qid": "Q10",
+      "query": "阿岚真实身份是什么，深井铃在他身上吗",
+      "difficulty": "medium",
+      "intent": "npc_profile",
+      "filters": {},
+      "first_relevant_rank": 1,
+      "retrieved": [
+        "wiki:npc_profiles:s05:w01",
+        "wiki:world_overview:s09:w01",
+        "task:T_SIDE_0216",
+        "task:T_MAIN_0103",
+        "wiki:npc_profiles:s07:w01",
+        "task:T_SIDE_0216#branches",
+        "task:T_MAIN_0103#branches",
+        "task:T_SIDE_0216#rewards",
+        "wiki:npc_profiles:s02:w01",
+        "task:T_SIDE_0216#objectives"
+      ],
+      "relevant": [
+        "wiki:npc_profiles:s05:w01",
+        "wiki:npc_profiles:s07:w01"
+      ],
+      "recall": {
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": true,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 1.0,
+      "ndcg": 0.9328,
+      "source_type_precision": 0.4
+    },
+    {
+      "qid": "Q11",
+      "query": "议长沈砚为什么不把话说满",
+      "difficulty": "easy",
+      "intent": "npc_profile",
+      "filters": {},
+      "first_relevant_rank": 2,
+      "retrieved": [
+        "wiki:npc_profiles:s07:w01",
+        "wiki:npc_profiles:s03:w01",
+        "task:T_MAIN_0103#branches",
+        "task:T_MAIN_0103",
+        "wiki:npc_profiles:s04:w01",
+        "wiki:world_overview:s08:w01",
+        "task:T_MAIN_0102",
+        "wiki:npc_profiles:s05:w01",
+        "task:T_MAIN_0102#objectives",
+        "wiki:world_overview:s02:w01"
+      ],
+      "relevant": [
+        "wiki:npc_profiles:s03:w01"
+      ],
+      "recall": {
+        "recall@1": 0.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": false,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 0.5,
+      "ndcg": 0.6309,
+      "source_type_precision": 0.6
+    },
+    {
+      "qid": "Q12",
+      "query": "担保人、登记人这类角色该找哪些次要 NPC",
+      "difficulty": "medium",
+      "intent": "npc_profile",
+      "filters": {},
+      "first_relevant_rank": 1,
+      "retrieved": [
+        "wiki:npc_profiles:s06:w01",
+        "wiki:quest_design_spec:s04:w01",
+        "wiki:npc_profiles:s03:w01",
+        "wiki:world_overview:s04:w01",
+        "wiki:world_overview:s02:w01",
+        "constraint:C_DIALOGUE_FORMAT_01",
+        "wiki:npc_profiles:s01:w01",
+        "constraint:C_DIALOGUE_LENGTH_01",
+        "task:T_MAIN_0103#branches",
+        "wiki:npc_profiles:s02:w01"
+      ],
+      "relevant": [
+        "wiki:npc_profiles:s06:w01",
+        "wiki:npc_profiles:s07:w01"
+      ],
+      "recall": {
+        "recall@1": 0.5,
+        "recall@5": 0.5,
+        "recall@10": 0.5
+      },
+      "hit": {
+        "hit@1": true,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 1.0,
+      "ndcg": 0.8262,
+      "source_type_precision": 0.7
+    },
+    {
+      "qid": "Q13",
+      "query": "支线的等级段是多少，单条任务最多几个目标",
+      "difficulty": "medium",
+      "intent": "quest_rule",
+      "filters": {},
+      "first_relevant_rank": 1,
+      "retrieved": [
+        "wiki:quest_design_spec:s02:w02",
+        "task:T_SIDE_0215",
+        "task:T_SIDE_0213",
+        "task:T_SIDE_0214",
+        "constraint:C_REWARD_EXP_01",
+        "task:T_SIDE_0216",
+        "wiki:quest_design_spec:s03:w01",
+        "constraint:C_DEP_LEVEL_ORDER_01",
+        "wiki:npc_profiles:s05:w01",
+        "wiki:quest_design_spec:s02:w01"
+      ],
+      "relevant": [
+        "wiki:quest_design_spec:s02:w02",
+        "wiki:quest_design_spec:s03:w01"
+      ],
+      "recall": {
+        "recall@1": 0.5,
+        "recall@5": 0.5,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": true,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 1.0,
+      "ndcg": 0.918,
+      "source_type_precision": 0.4
+    },
+    {
+      "qid": "Q14",
+      "query": "对白超过 120 字会触发什么警告",
+      "difficulty": "medium",
+      "intent": "quest_rule",
+      "filters": {},
+      "first_relevant_rank": 1,
+      "retrieved": [
+        "constraint:C_DIALOGUE_LENGTH_01",
+        "wiki:quest_design_spec:s04:w01",
+        "wiki:npc_profiles:s04:w01",
+        "task:T_SIDE_0213",
+        "wiki:quest_design_spec:s03:w01",
+        "task:T_SIDE_0213#rewards",
+        "wiki:npc_profiles:s02:w01",
+        "task:T_SIDE_0216",
+        "wiki:world_overview:s08:w01",
+        "constraint:C_ACTIVITY_STACK_LIMIT_01"
+      ],
+      "relevant": [
+        "wiki:quest_design_spec:s04:w01",
+        "constraint:C_DIALOGUE_LENGTH_01"
+      ],
+      "recall": {
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": true,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 1.0,
+      "ndcg": 0.7967,
+      "source_type_precision": 0.7
+    },
+    {
+      "qid": "Q15",
+      "query": "task_id 命名规则是什么，删除后的号能复用吗",
+      "difficulty": "hard",
+      "intent": "quest_rule",
+      "filters": {},
+      "first_relevant_rank": 1,
+      "retrieved": [
+        "wiki:quest_design_spec:s05:w01",
+        "wiki:quest_design_spec:s01:w01",
+        "constraint:C_TASK_ID_UNIQUE_01",
+        "wiki:npc_profiles:s04:w01",
+        "wiki:npc_profiles:s02:w01",
+        "wiki:quest_design_spec:s04:w01",
+        "wiki:quest_design_spec:s02:w01",
+        "wiki:quest_design_spec:s06:w02",
+        "wiki:world_overview:s08:w01",
+        "constraint:C_AREA_EXISTS_01"
+      ],
+      "relevant": [
+        "wiki:quest_design_spec:s05:w01",
+        "constraint:C_TASK_ID_UNIQUE_01"
+      ],
+      "recall": {
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": true,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 1.0,
+      "ndcg": 0.9639,
+      "source_type_precision": 1.0
+    },
+    {
+      "qid": "Q16",
+      "query": "6 级铁匠支线，去矿洞采集，给个范例",
+      "difficulty": "easy",
+      "intent": "similar_task",
+      "filters": {
+        "source_type": [
+          "task"
+        ],
+        "task_type": "side"
+      },
+      "first_relevant_rank": 2,
+      "retrieved": [
+        "task:T_SIDE_0213",
+        "task:T_SIDE_0213#objectives",
+        "task:T_SIDE_0215",
+        "task:T_SIDE_0214",
+        "task:T_SIDE_0216",
+        "task:T_SIDE_0213#branches",
+        "task:T_SIDE_0216#objectives",
+        "task:T_SIDE_0213#rewards",
+        "task:T_SIDE_0214#objectives",
+        "task:T_SIDE_0216#branches"
+      ],
+      "relevant": [
+        "task:T_SIDE_0213#objectives",
+        "task:T_SIDE_0213#rewards"
+      ],
+      "recall": {
+        "recall@1": 0.0,
+        "recall@5": 0.5,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": false,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 0.5,
+      "ndcg": 0.6082,
+      "source_type_precision": 1.0
+    },
+    {
+      "qid": "Q17",
+      "query": "10 级日常，交六块铁尘矿石，炉子不能停",
+      "difficulty": "medium",
+      "intent": "similar_task",
+      "filters": {
+        "source_type": [
+          "task"
+        ],
+        "task_type": "daily"
+      },
+      "first_relevant_rank": 4,
+      "retrieved": [
+        "task:T_DAILY_0301",
+        "task:T_DAILY_0302",
+        "task:T_DAILY_0303",
+        "task:T_DAILY_0301#objectives",
+        "task:T_DAILY_0301#branches",
+        "task:T_DAILY_0301#rewards"
+      ],
+      "relevant": [
+        "task:T_DAILY_0301#objectives",
+        "task:T_DAILY_0301#rewards"
+      ],
+      "recall": {
+        "recall@1": 0.0,
+        "recall@5": 0.5,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": false,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 0.25,
+      "ndcg": 0.4539,
+      "source_type_precision": 1.0
+    },
+    {
+      "qid": "Q18",
+      "query": "4 级主线，封条被撕了要不要上报，有没有分支",
+      "difficulty": "medium",
+      "intent": "similar_task",
+      "filters": {
+        "source_type": [
+          "task"
+        ],
+        "task_type": "main"
+      },
+      "first_relevant_rank": 2,
+      "retrieved": [
+        "task:T_MAIN_0102",
+        "task:T_MAIN_0102#branches",
+        "task:T_MAIN_0101",
+        "task:T_MAIN_0103",
+        "task:T_MAIN_0102#rewards",
+        "task:T_MAIN_0102#objectives",
+        "task:T_MAIN_0103#branches",
+        "task:T_MAIN_0101#branches"
+      ],
+      "relevant": [
+        "task:T_MAIN_0102#branches",
+        "task:T_MAIN_0102#objectives"
+      ],
+      "recall": {
+        "recall@1": 0.0,
+        "recall@5": 0.5,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": false,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 0.5,
+      "ndcg": 0.6194,
+      "source_type_precision": 1.0
+    },
+    {
+      "qid": "Q19",
+      "query": "Lv20 的任务金币奖励上限是多少",
+      "difficulty": "easy",
+      "intent": "constraint_lookup",
+      "filters": {
+        "source_type": [
+          "constraint"
+        ]
+      },
+      "first_relevant_rank": 1,
+      "retrieved": [
+        "constraint:C_REWARD_GOLD_01",
+        "constraint:C_REWARD_GOLD_MIN_01",
+        "constraint:C_REWARD_EXP_01",
+        "constraint:C_ACTIVITY_STACK_LIMIT_01",
+        "constraint:C_REWARD_EXP_MIN_01",
+        "constraint:C_REWARD_ITEM_COUNT_01",
+        "constraint:C_REWARD_ACTIVITY_EXCLUSIVE_01",
+        "constraint:C_PREREQ_EXISTS_01",
+        "constraint:C_DIALOGUE_ASSIGN_UNIQUE_01",
+        "constraint:C_TASK_ID_UNIQUE_01"
+      ],
+      "relevant": [
+        "constraint:C_REWARD_GOLD_01"
+      ],
+      "recall": {
+        "recall@1": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": true,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "source_type_precision": 1.0
+    },
+    {
+      "qid": "Q20",
+      "query": "前置任务成环会报什么错，会自动修复吗",
+      "difficulty": "hard",
+      "intent": "constraint_lookup",
+      "filters": {},
+      "first_relevant_rank": 1,
+      "retrieved": [
+        "wiki:quest_design_spec:s06:w01",
+        "constraint:C_PREREQ_EXISTS_01",
+        "constraint:C_DEP_NO_CYCLE_01",
+        "constraint:C_DEP_LEVEL_ORDER_01",
+        "wiki:npc_profiles:s04:w01",
+        "wiki:quest_design_spec:s06:w02",
+        "wiki:quest_design_spec:s02:w01",
+        "task:T_DAILY_0302",
+        "task:T_DAILY_0303",
+        "task:T_SIDE_0215"
+      ],
+      "relevant": [
+        "constraint:C_DEP_NO_CYCLE_01",
+        "wiki:quest_design_spec:s06:w01"
+      ],
+      "recall": {
+        "recall@1": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0
+      },
+      "hit": {
+        "hit@1": true,
+        "hit@5": true,
+        "hit@10": true
+      },
+      "mrr": 1.0,
+      "ndcg": 0.6885,
+      "source_type_precision": 0.7
+    }
+  ],
+  "notes": [
+    "Recall@k = |相关块 ∩ top-k| / |相关块|，按 query 取平均；hit@k 为「top-k 内至少命中一个相关块」的比例。",
+    "MRR@10 = 首个相关块排名倒数（前 10 内未命中记 0），按 query 取平均。",
+    "nDCG@10 使用分级增益 2^rel-1，ideal 排序取该 query 的全部相关块。",
+    "20 条 query 全部为可回答问题；知识库外拒答归 Agent 级评测（S7-01/S7-03），不进检索指标分母。",
+    "chunk 标识方案 wiki:<stem>:s<节序号 2 位>:w<窗口序号 2 位> | task:<task_id>[#objectives|#rewards|#branches] | constraint:<约束 ID>（对齐状态：aligned_with_rag_chunker）；标注已用 rag/chunker.py 的真实 chunk_id 校验，指标实现不做模糊匹配。",
+    "dense 分支为 noop（BGE-M3 / Chroma adapter 未接入），本次基线为 BM25 + RRF 降级配置；dense adapter 就绪后需重跑同一 qrels 再对比。"
+  ]
+}

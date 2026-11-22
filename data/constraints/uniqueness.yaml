@@ -1,0 +1,17 @@
+# 《星港纪元》唯一性约束（C_TASK_ID_* / C_DIALOGUE_*）
+# 任务 ID 全库唯一；同一条对白只归属一条任务的发布者。
+- id: "C_TASK_ID_UNIQUE_01"
+  scope: "task_id"
+  type: "unique"
+  severity: "error"
+  message: "任务 ID {task_id} 已存在（{existing_path}）"
+  rationale: "任务 ID 是检索、回链与提交审计的主键，重复会让相似任务召回和写入回滚同时出错。"
+  target: "tasks"
+
+- id: "C_DIALOGUE_ASSIGN_UNIQUE_01"
+  scope: "giver.dialogue_ref"
+  type: "unique"
+  severity: "warning"
+  message: "对白 {dialogue_ref} 已绑定任务 {existing_task}"
+  rationale: "一条对白只归一条任务的发布者，日常任务的循环台词应走公共对白池，避免改一句台词牵动多个任务。"
+  target: "dialogue_assignments"

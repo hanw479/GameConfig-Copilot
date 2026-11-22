@@ -1,0 +1,58 @@
+# 构建上下文裁剪（S8-01）。
+# 镜像只从 pyproject/README/src/data/prompts/config/tests/scripts 与 docs/reports 取文件；
+# data/ 语料必须保留（构建期 `gcc ingest` 要用），只排除运行产物与密钥。
+
+# ---- VCS / 编辑器 / 系统 ----
+.git
+.gitignore
+.gitattributes
+.idea
+.vscode
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Python / 工具缓存 ----
+__pycache__
+*.py[cod]
+*.egg-info
+.venv
+venv
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.coverage
+.coverage.*
+htmlcov
+coverage.xml
+
+# ---- 密钥 / 本地配置（绝不进镜像）----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets
+
+# ---- 运行产物：镜像内会重新生成（只排除仓库根，避免误伤 docs/reports）----
+/out
+/reports
+/traces
+/logs
+*.log
+tmp
+data/backups
+data/memory
+data/.locks
+*.sqlite3
+*.db
+
+# ---- 文档 / 演示资产（运行不需要；仅保留面板读取的已入库基线）----
+docs/*
+!docs/reports
+!docs/reports/**
+*.mp4
+*.mov
+*.png
+*.jpg
+*.jpeg

@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "task_id": "T_SIDE_0216",
+  "title": "听见的人",
+  "task_type": "side",
+  "level_range": {
+    "min": 12,
+    "max": 18
+  },
+  "giver": {
+    "npc_id": "NPC_021",
+    "dialogue_ref": "DLG_021_01"
+  },
+  "prerequisites": [
+    {
+      "type": "task_completed",
+      "ref": "T_MAIN_0102"
+    }
+  ],
+  "objectives": [
+    {
+      "seq": 1,
+      "type": "talk_to",
+      "target": "NPC_021",
+      "count": 1,
+      "area": "MAP_MINE_03"
+    },
+    {
+      "seq": 2,
+      "type": "collect",
+      "target": "ITEM_ORE_05",
+      "count": 1,
+      "area": "MAP_MINE_03"
+    },
+    {
+      "seq": 3,
+      "type": "reach",
+      "target": "MAP_WASTELAND_02",
+      "count": 1,
+      "area": "MAP_WASTELAND_02"
+    }
+  ],
+  "rewards": [
+    {
+      "type": "gold",
+      "amount": 320
+    },
+    {
+      "type": "exp",
+      "amount": 2200
+    },
+    {
+      "type": "item",
+      "amount": 1,
+      "item_id": "ITEM_RELIC_DEEPWELL_01"
+    }
+  ],
+  "branches": [
+    {
+      "branch_id": "b_silence",
+      "condition": "替阿岚把井口的动静瞒下来",
+      "objectives": [
+        {
+          "seq": 1,
+          "type": "talk_to",
+          "target": "NPC_021",
+          "count": 1,
+          "area": "MAP_MINE_03"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "exp",
+          "amount": 400
+        }
+      ]
+    },
+    {
+      "branch_id": "b_ledger",
+      "condition": "把在井口听到的一切写进议会档案",
+      "objectives": [
+        {
+          "seq": 1,
+          "type": "talk_to",
+          "target": "NPC_001",
+          "count": 1,
+          "area": "MAP_STARPORT_01"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "gold",
+          "amount": 120
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "side",
+    "chapter01",
+    "deepwell",
+    "npc_miner"
+  ],
+  "provenance": {
+    "request": "写一条 12 级教团支线：阿岚托玩家去井口取一块深井萤石，再带到荒原哨站；结束后他把贴身的深井铃交给玩家。",
+    "evidence": [
+      "wiki:npc_profiles#四、NPC_021 矿工 阿岚",
+      "wiki:world_overview#二、三大势力",
+      "wiki:quest_design_spec#三、对白长度与文案"
+    ],
+    "model": "handcrafted-wave0",
+    "created_at": "2026-11-14T10:25:00+08:00"
+  }
+}

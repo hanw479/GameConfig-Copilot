@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "task_id": "T_SIDE_0214",
+  "title": "荒原上的水",
+  "task_type": "side",
+  "level_range": {
+    "min": 10,
+    "max": 14
+  },
+  "giver": {
+    "npc_id": "NPC_034",
+    "dialogue_ref": "DLG_034_01"
+  },
+  "prerequisites": [],
+  "objectives": [
+    {
+      "seq": 1,
+      "type": "talk_to",
+      "target": "NPC_034",
+      "count": 1,
+      "area": "MAP_WASTELAND_02"
+    },
+    {
+      "seq": 2,
+      "type": "reach",
+      "target": "MAP_MINE_03",
+      "count": 1,
+      "area": "MAP_MINE_03"
+    }
+  ],
+  "rewards": [
+    {
+      "type": "gold",
+      "amount": 150
+    },
+    {
+      "type": "exp",
+      "amount": 1000
+    },
+    {
+      "type": "item",
+      "amount": 2,
+      "item_id": "ITEM_ORE_02"
+    },
+    {
+      "type": "item",
+      "amount": 1,
+      "item_id": "ITEM_ORE_05"
+    }
+  ],
+  "branches": [],
+  "tags": [
+    "side",
+    "chapter01",
+    "npc_sentry",
+    "wasteland"
+  ],
+  "provenance": {
+    "request": "写一条 10 级支线：荒原哨站的水塔管道在矿洞方向断了，老鸦让玩家跑一趟看断口在哪，回来用剩下的料子补上。",
+    "evidence": [
+      "wiki:npc_profiles#五、次要 NPC",
+      "wiki:world_overview#三、地点与通行",
+      "wiki:quest_design_spec#二、奖励区间与等级约束"
+    ],
+    "model": "handcrafted-wave0",
+    "created_at": "2026-11-14T09:55:00+08:00"
+  }
+}

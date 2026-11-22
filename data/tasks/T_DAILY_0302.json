@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "task_id": "T_DAILY_0302",
+  "title": "哨站巡查",
+  "task_type": "daily",
+  "level_range": {
+    "min": 12,
+    "max": 18
+  },
+  "giver": {
+    "npc_id": "NPC_034"
+  },
+  "prerequisites": [],
+  "objectives": [
+    {
+      "seq": 1,
+      "type": "reach",
+      "target": "MAP_WASTELAND_02",
+      "count": 1,
+      "area": "MAP_WASTELAND_02"
+    }
+  ],
+  "rewards": [
+    {
+      "type": "gold",
+      "amount": 260
+    },
+    {
+      "type": "exp",
+      "amount": 1800
+    }
+  ],
+  "branches": [],
+  "tags": [
+    "daily",
+    "chapter01",
+    "npc_sentry",
+    "wasteland"
+  ],
+  "provenance": {
+    "request": "给老鸦加一条 12 级日常：每天沿水塔到矿洞口走一圈，把沿途的桩号报回来。",
+    "evidence": [
+      "wiki:npc_profiles#五、次要 NPC",
+      "wiki:npc_profiles#六、NPC 索引",
+      "wiki:quest_design_spec#二、奖励区间与等级约束"
+    ],
+    "model": "handcrafted-wave0",
+    "created_at": "2026-11-14T10:55:00+08:00"
+  }
+}

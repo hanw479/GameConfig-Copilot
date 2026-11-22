@@ -1,0 +1,21 @@
+# 《星港纪元》区域类约束（C_AREA_*）
+# 目标区域必须存在，且只能落在第一章开放的三张地图内。
+- id: "C_AREA_EXISTS_01"
+  scope: "objectives[].area"
+  type: "reference_exists"
+  severity: "error"
+  message: "目标区域 {area} 不存在"
+  rationale: "区域 ID 会写进寻路与刷怪配置，指向不存在的地图会让任务在运行时直接卡死。"
+  target: "maps"
+
+- id: "C_AREA_ENUM_01"
+  scope: "objectives[].area"
+  type: "enum"
+  severity: "error"
+  message: "区域 {area} 不在第一章开放清单内"
+  rationale: "第一章只开放星港城、废弃矿洞与荒原哨站三张地图，其余区域留到后续章节，避免新手被引到未完成场景。"
+  params:
+    values:
+      - "MAP_STARPORT_01"
+      - "MAP_MINE_03"
+      - "MAP_WASTELAND_02"

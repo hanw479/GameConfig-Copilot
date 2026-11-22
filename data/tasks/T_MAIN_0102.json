@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "task_id": "T_MAIN_0102",
+  "title": "封条之下",
+  "task_type": "main",
+  "level_range": {
+    "min": 4,
+    "max": 8
+  },
+  "giver": {
+    "npc_id": "NPC_001",
+    "dialogue_ref": "DLG_001_01"
+  },
+  "prerequisites": [
+    {
+      "type": "task_completed",
+      "ref": "T_MAIN_0101"
+    }
+  ],
+  "objectives": [
+    {
+      "seq": 1,
+      "type": "talk_to",
+      "target": "NPC_001",
+      "count": 1,
+      "area": "MAP_STARPORT_01"
+    },
+    {
+      "seq": 2,
+      "type": "reach",
+      "target": "MAP_MINE_03",
+      "count": 1,
+      "area": "MAP_MINE_03"
+    },
+    {
+      "seq": 3,
+      "type": "collect",
+      "target": "ITEM_ORE_02",
+      "count": 5,
+      "area": "MAP_MINE_03"
+    }
+  ],
+  "rewards": [
+    {
+      "type": "gold",
+      "amount": 150
+    },
+    {
+      "type": "exp",
+      "amount": 1050
+    }
+  ],
+  "branches": [
+    {
+      "branch_id": "b_report",
+      "condition": "把矿洞封条被破坏的情况如实报告议会",
+      "objectives": [
+        {
+          "seq": 1,
+          "type": "talk_to",
+          "target": "NPC_001",
+          "count": 1,
+          "area": "MAP_STARPORT_01"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "gold",
+          "amount": 60
+        },
+        {
+          "type": "exp",
+          "amount": 200
+        }
+      ]
+    },
+    {
+      "branch_id": "b_conceal",
+      "condition": "隐瞒私自开采的痕迹，把多出来的矿石带走",
+      "objectives": [
+        {
+          "seq": 1,
+          "type": "reach",
+          "target": "MAP_WASTELAND_02",
+          "count": 1,
+          "area": "MAP_WASTELAND_02"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "item",
+          "amount": 1,
+          "item_id": "ITEM_ORE_05"
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "main",
+    "chapter01",
+    "npc_speaker",
+    "mine"
+  ],
+  "provenance": {
+    "request": "接开场之后，写一条 4 级主线：议长要玩家去确认矿洞封条是不是被人撕了，回来交五块铁尘矿石作凭证，路上可以选报不报告。",
+    "evidence": [
+      "wiki:world_overview#二、三大势力",
+      "wiki:npc_profiles#二、NPC_001 议长 沈砚",
+      "wiki:quest_design_spec#五、引用字段与校验"
+    ],
+    "model": "handcrafted-wave0",
+    "created_at": "2026-11-14T09:25:00+08:00"
+  }
+}

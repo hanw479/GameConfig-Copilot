@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "task_id": "T_MAIN_0103",
+  "title": "井底的回声",
+  "task_type": "main",
+  "level_range": {
+    "min": 9,
+    "max": 15
+  },
+  "giver": {
+    "npc_id": "NPC_021",
+    "dialogue_ref": "DLG_021_02"
+  },
+  "prerequisites": [
+    {
+      "type": "task_completed",
+      "ref": "T_MAIN_0102"
+    }
+  ],
+  "objectives": [
+    {
+      "seq": 1,
+      "type": "talk_to",
+      "target": "NPC_021",
+      "count": 1,
+      "area": "MAP_MINE_03"
+    },
+    {
+      "seq": 2,
+      "type": "collect",
+      "target": "ITEM_ORE_05",
+      "count": 2,
+      "area": "MAP_MINE_03"
+    },
+    {
+      "seq": 3,
+      "type": "talk_to",
+      "target": "NPC_034",
+      "count": 1,
+      "area": "MAP_WASTELAND_02"
+    }
+  ],
+  "rewards": [
+    {
+      "type": "gold",
+      "amount": 150
+    },
+    {
+      "type": "exp",
+      "amount": 1100
+    }
+  ],
+  "branches": [
+    {
+      "branch_id": "b_believe",
+      "condition": "听完阿岚的话，答应不把井口的位置说出去",
+      "objectives": [
+        {
+          "seq": 1,
+          "type": "talk_to",
+          "target": "NPC_021",
+          "count": 1,
+          "area": "MAP_MINE_03"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "exp",
+          "amount": 300
+        }
+      ]
+    },
+    {
+      "branch_id": "b_report",
+      "condition": "转身回城，把井口位置写进议会的登记档案",
+      "objectives": [
+        {
+          "seq": 1,
+          "type": "talk_to",
+          "target": "NPC_001",
+          "count": 1,
+          "area": "MAP_STARPORT_01"
+        }
+      ],
+      "rewards": [
+        {
+          "type": "gold",
+          "amount": 60
+        }
+      ]
+    }
+  ],
+  "tags": [
+    "main",
+    "chapter01",
+    "npc_miner",
+    "deepwell"
+  ],
+  "provenance": {
+    "request": "第一章收尾的主线，9 级起：阿岚在矿洞里说出井底的秘密，让玩家从最深处带两块深井萤石去荒原哨站交给老鸦，最后自己决定站哪边。",
+    "evidence": [
+      "wiki:npc_profiles#四、NPC_021 矿工 阿岚",
+      "wiki:world_overview#三、地点与通行",
+      "wiki:quest_design_spec#二、奖励区间与等级约束"
+    ],
+    "model": "handcrafted-wave0",
+    "created_at": "2026-11-14T09:40:00+08:00"
+  }
+}

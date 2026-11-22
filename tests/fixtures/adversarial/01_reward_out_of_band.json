@@ -1,0 +1,32 @@
+{
+  "id": "adv-01-reward-out-of-band",
+  "kind": "reward_out_of_band",
+  "description": "越界奖励：Lv6-9 支线要求 1000 金币，超出 C_REWARD_GOLD_01 在该等级段的 200 上限。",
+  "draft": {
+    "schema_version": 1,
+    "task_id": "T_SIDE_0299",
+    "title": "铁匠的委托：失踪的矿车",
+    "task_type": "side",
+    "level_range": {"min": 6, "max": 9},
+    "giver": {"npc_id": "NPC_013", "dialogue_ref": "DLG_013_02"},
+    "prerequisites": [{"type": "task_completed", "ref": "T_MAIN_0102"}],
+    "objectives": [
+      {"seq": 1, "type": "talk_to", "target": "NPC_013", "count": 1, "area": "MAP_STARPORT_01"},
+      {"seq": 2, "type": "collect", "target": "ITEM_ORE_02", "count": 4, "area": "MAP_MINE_03"}
+    ],
+    "rewards": [{"type": "gold", "amount": 1000}, {"type": "exp", "amount": 800}],
+    "branches": [],
+    "tags": ["side", "chapter01", "npc_blacksmith"],
+    "provenance": {
+      "request": "给铁匠老陈加一条 6 级支线，去矿洞捡 4 块矿石，奖励给 1000 金币",
+      "evidence": ["wiki:world_overview#faction", "task:T_MAIN_0102#objectives"],
+      "model": "deepseek-chat",
+      "created_at": "2026-11-12T10:00:00+08:00"
+    }
+  },
+  "expected": {
+    "ok": false,
+    "codes": ["E_REWARD_RANGE"],
+    "constraint_refs": ["C_REWARD_GOLD_01"]
+  }
+}

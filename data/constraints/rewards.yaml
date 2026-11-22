@@ -1,0 +1,65 @@
+# 《星港纪元》奖励类约束（C_REWARD_*）
+# 覆盖金币/阅历的分档上限、道具奖励数量，以及活动奖励与常规奖励的边界。
+- id: "C_REWARD_GOLD_01"
+  scope: "rewards.gold"
+  type: "level_band_max"
+  severity: "error"
+  message: "Lv{level} 的任务金币奖励不得超过 {limit}"
+  rationale: "控制经济通胀，见《星港纪元》经济白皮书 §3.2；铭币背后是议会的配给额度，超发会立刻推高下环物价。"
+  bands:
+    - {max_level: 10, max_amount: 200}
+    - {max_level: 20, max_amount: 500}
+    - {max_level: 30, max_amount: 1200}
+
+- id: "C_REWARD_EXP_01"
+  scope: "rewards.exp"
+  type: "level_band_max"
+  severity: "error"
+  message: "Lv{level} 的任务阅历奖励不得超过 {limit}"
+  rationale: "阅历按金币的 6–8 倍折算，上限取 8 倍封顶，避免单条任务把玩家直接推进下一等级段。"
+  bands:
+    - {max_level: 10, max_amount: 1600}
+    - {max_level: 20, max_amount: 4000}
+    - {max_level: 30, max_amount: 9600}
+
+- id: "C_REWARD_GOLD_MIN_01"
+  scope: "rewards.gold"
+  type: "level_band_range"
+  severity: "error"
+  message: "Lv{level} 的任务金币奖励必须落在 {min}–{max} 之间"
+  rationale: "经济节奏：下限取同档上限的 30%（Lv≤10 60 / Lv≤20 150 / Lv≤30 360），防止奖励过低破坏成长曲线；下限与上限同时生效，低于下限同样按 E_REWARD_RANGE 拒绝。"
+  bands:
+    - {max_level: 10, min_amount: 60, max_amount: 200}
+    - {max_level: 20, min_amount: 150, max_amount: 500}
+    - {max_level: 30, min_amount: 360, max_amount: 1200}
+
+- id: "C_REWARD_EXP_MIN_01"
+  scope: "rewards.exp"
+  type: "level_band_range"
+  severity: "error"
+  message: "Lv{level} 的任务阅历奖励必须落在 {min}–{max} 之间"
+  rationale: "经济节奏：阅历下限取同档上限的 30%（Lv≤10 480 / Lv≤20 1200 / Lv≤30 2880），保持阅历与金币 6–8 倍的折算关系；低于下限会让任务产出无法支撑该等级段的成长曲线。"
+  bands:
+    - {max_level: 10, min_amount: 480, max_amount: 1600}
+    - {max_level: 20, min_amount: 1200, max_amount: 4000}
+    - {max_level: 30, min_amount: 2880, max_amount: 9600}
+
+- id: "C_REWARD_ITEM_COUNT_01"
+  scope: "rewards.item"
+  type: "range"
+  severity: "error"
+  message: "道具奖励数量 {actual} 超出 {min}–{max} 件"
+  rationale: "道具堆叠会稀释金币与阅历的定位，也让任务之间的产出难以横向比较。"
+  params:
+    min: 1
+    max: 2
+
+- id: "C_REWARD_ACTIVITY_EXCLUSIVE_01"
+  scope: "rewards"
+  type: "conflict"
+  severity: "error"
+  message: "活动奖励必须写入 activity_rewards，不得与常规 rewards 混写"
+  rationale: "活动加成随档期开始与结束，混写会让历史任务的奖励结构失去可比性，也无法在活动结束后干净回滚。"
+  params:
+    conflicts_with: "activity_rewards"
+    allow_override: false

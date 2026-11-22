@@ -1,0 +1,42 @@
+{
+  "id": "adv-04-dependency-cycle",
+  "kind": "dependency_cycle",
+  "description": "成环：新草案 T_SIDE_0297 以 T_MAIN_0103 为前置，而仓储里 T_MAIN_0103 反过来以 T_SIDE_0297 为前置，必须返回 E_DEP_CYCLE。",
+  "draft": {
+    "schema_version": 1,
+    "task_id": "T_SIDE_0297",
+    "title": "回声矿道",
+    "task_type": "side",
+    "level_range": {"min": 12, "max": 15},
+    "giver": {"npc_id": "NPC_034", "dialogue_ref": "DLG_034_01"},
+    "prerequisites": [{"type": "task_completed", "ref": "T_MAIN_0103"}],
+    "objectives": [
+      {"seq": 1, "type": "talk_to", "target": "NPC_034", "count": 1, "area": "MAP_WASTELAND_02"},
+      {"seq": 2, "type": "reach", "target": "MAP_MINE_03", "count": 1, "area": "MAP_MINE_03"}
+    ],
+    "rewards": [{"type": "gold", "amount": 120}, {"type": "exp", "amount": 800}],
+    "branches": [],
+    "tags": ["side", "chapter01", "npc_sentry"],
+    "provenance": {
+      "request": "加一条回声矿道支线，接在主线第三章之后",
+      "evidence": ["task:T_MAIN_0103#objectives"],
+      "model": "deepseek-chat",
+      "created_at": "2026-11-12T10:00:00+08:00"
+    }
+  },
+  "repo": {
+    "tasks": [
+      {
+        "task_id": "T_MAIN_0103",
+        "level_min": 9,
+        "prerequisites": ["T_SIDE_0297"],
+        "path": "data/tasks/T_MAIN_0103.json"
+      }
+    ]
+  },
+  "expected": {
+    "ok": false,
+    "codes": ["E_DEP_CYCLE"],
+    "constraint_refs": ["C_DEP_NO_CYCLE_01"]
+  }
+}

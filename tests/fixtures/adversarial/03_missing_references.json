@@ -1,0 +1,69 @@
+{
+  "id": "adv-03-missing-references",
+  "kind": "missing_reference",
+  "description": "缺失引用：前置任务、NPC、道具、对白、地图全部指向不存在的 ID；另加三条仓储级 reference_exists 约束证明 npcs/items/dialogs 目标可用。",
+  "draft": {
+    "schema_version": 1,
+    "task_id": "T_SIDE_0298",
+    "title": "幽灵矿脉的低语",
+    "task_type": "side",
+    "level_range": {"min": 6, "max": 9},
+    "giver": {"npc_id": "NPC_999", "dialogue_ref": "DLG_999_01"},
+    "prerequisites": [{"type": "task_completed", "ref": "T_MAIN_9999"}],
+    "objectives": [
+      {"seq": 1, "type": "talk_to", "target": "NPC_998", "count": 1, "area": "MAP_LOST_09"},
+      {"seq": 2, "type": "collect", "target": "ITEM_ORE_02", "count": 4, "area": "MAP_MINE_03"}
+    ],
+    "rewards": [
+      {"type": "gold", "amount": 120},
+      {"type": "exp", "amount": 800},
+      {"type": "item", "amount": 1, "item_id": "ITEM_MISSING_02"}
+    ],
+    "branches": [],
+    "tags": ["side", "chapter01"],
+    "provenance": {
+      "request": "接一条幽灵矿脉支线，NPC 与地图稍后补",
+      "evidence": ["wiki:quest_design_spec#chain"],
+      "model": "deepseek-chat",
+      "created_at": "2026-11-12T10:00:00+08:00"
+    }
+  },
+  "constraints": [
+    {
+      "id": "C_NPC_EXISTS_01",
+      "scope": "giver.npc_id",
+      "type": "reference_exists",
+      "target": "npcs",
+      "severity": "error",
+      "message": "NPC {ref} 不存在"
+    },
+    {
+      "id": "C_ITEM_EXISTS_01",
+      "scope": "rewards[].item_id",
+      "type": "reference_exists",
+      "target": "items",
+      "severity": "error",
+      "message": "道具 {ref} 不存在"
+    },
+    {
+      "id": "C_DIALOGUE_EXISTS_01",
+      "scope": "giver.dialogue_ref",
+      "type": "reference_exists",
+      "target": "dialogs",
+      "severity": "error",
+      "message": "对白 {dialogue_ref} 不存在"
+    }
+  ],
+  "expected": {
+    "ok": false,
+    "codes": ["E_REF_MISSING", "E_SCHEMA_002"],
+    "constraint_refs": [
+      "C_PREREQ_EXISTS_01",
+      "C_AREA_EXISTS_01",
+      "C_AREA_ENUM_01",
+      "C_NPC_EXISTS_01",
+      "C_ITEM_EXISTS_01",
+      "C_DIALOGUE_EXISTS_01"
+    ]
+  }
+}

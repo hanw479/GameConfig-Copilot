@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "task_id": "T_MAIN_0101",
+  "title": "升降井的异响",
+  "task_type": "main",
+  "level_range": {
+    "min": 1,
+    "max": 3
+  },
+  "giver": {
+    "npc_id": "NPC_007",
+    "dialogue_ref": "DLG_007_01"
+  },
+  "prerequisites": [],
+  "objectives": [
+    {
+      "seq": 1,
+      "type": "talk_to",
+      "target": "NPC_007",
+      "count": 1,
+      "area": "MAP_STARPORT_01"
+    },
+    {
+      "seq": 2,
+      "type": "collect",
+      "target": "ITEM_ORE_02",
+      "count": 3,
+      "area": "MAP_MINE_03"
+    },
+    {
+      "seq": 3,
+      "type": "talk_to",
+      "target": "NPC_013",
+      "count": 1,
+      "area": "MAP_STARPORT_01"
+    }
+  ],
+  "rewards": [
+    {
+      "type": "gold",
+      "amount": 80
+    },
+    {
+      "type": "exp",
+      "amount": 480
+    }
+  ],
+  "branches": [],
+  "tags": [
+    "main",
+    "chapter01",
+    "npc_clerk"
+  ],
+  "provenance": {
+    "request": "写一条 1 级主线开场：下环升降井传出异响，记录官苏禾让新手去矿洞取三块铁尘矿石，回来拿给下环的老陈比对成色。",
+    "evidence": [
+      "wiki:npc_profiles#五、次要 NPC",
+      "wiki:world_overview#一、世界格局",
+      "wiki:quest_design_spec#一、任务类型与结构"
+    ],
+    "model": "handcrafted-wave0",
+    "created_at": "2026-11-14T09:10:00+08:00"
+  }
+}

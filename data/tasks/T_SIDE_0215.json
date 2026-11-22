@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "T_SIDE_0215",
+  "title": "补一份存档",
+  "task_type": "side",
+  "level_range": {
+    "min": 5,
+    "max": 8
+  },
+  "giver": {
+    "npc_id": "NPC_013",
+    "dialogue_ref": "DLG_013_01"
+  },
+  "prerequisites": [],
+  "objectives": [
+    {
+      "seq": 1,
+      "type": "talk_to",
+      "target": "NPC_007",
+      "count": 1,
+      "area": "MAP_STARPORT_01"
+    }
+  ],
+  "rewards": [
+    {
+      "type": "gold",
+      "amount": 90
+    },
+    {
+      "type": "exp",
+      "amount": 600
+    }
+  ],
+  "branches": [],
+  "tags": [
+    "side",
+    "chapter01",
+    "npc_blacksmith",
+    "npc_clerk"
+  ],
+  "provenance": {
+    "request": "加一条 5 级的小支线：老陈的工会凭牌在议会的登记簿上漏了一页，让玩家去档案室找苏禾补一份存档。",
+    "evidence": [
+      "wiki:npc_profiles#三、NPC_013 铁匠 老陈",
+      "wiki:npc_profiles#五、次要 NPC",
+      "wiki:quest_design_spec#一、任务类型与结构"
+    ],
+    "model": "handcrafted-wave0",
+    "created_at": "2026-11-14T10:10:00+08:00"
+  }
+}

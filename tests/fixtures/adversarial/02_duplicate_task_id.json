@@ -1,0 +1,32 @@
+{
+  "id": "adv-02-duplicate-task-id",
+  "kind": "duplicate_task_id",
+  "description": "重复 ID：草案复用了已提交的 T_SIDE_0213，必须被 C_TASK_ID_UNIQUE_01 拦下并建议下一个可用 ID。",
+  "draft": {
+    "schema_version": 1,
+    "task_id": "T_SIDE_0213",
+    "title": "铁匠的委托：失踪的矿车（重生成）",
+    "task_type": "side",
+    "level_range": {"min": 6, "max": 9},
+    "giver": {"npc_id": "NPC_013", "dialogue_ref": "DLG_013_02"},
+    "prerequisites": [{"type": "task_completed", "ref": "T_MAIN_0102"}],
+    "objectives": [
+      {"seq": 1, "type": "talk_to", "target": "NPC_013", "count": 1, "area": "MAP_STARPORT_01"},
+      {"seq": 2, "type": "collect", "target": "ITEM_ORE_02", "count": 4, "area": "MAP_MINE_03"}
+    ],
+    "rewards": [{"type": "gold", "amount": 120}, {"type": "exp", "amount": 800}],
+    "branches": [],
+    "tags": ["side", "chapter01", "npc_blacksmith"],
+    "provenance": {
+      "request": "再生成一次铁匠支线",
+      "evidence": ["task:T_SIDE_0213#objectives"],
+      "model": "deepseek-chat",
+      "created_at": "2026-11-12T10:00:00+08:00"
+    }
+  },
+  "expected": {
+    "ok": false,
+    "codes": ["E_DUP_ID"],
+    "constraint_refs": ["C_TASK_ID_UNIQUE_01"]
+  }
+}

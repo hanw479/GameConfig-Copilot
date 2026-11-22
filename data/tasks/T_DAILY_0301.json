@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "task_id": "T_DAILY_0301",
+  "title": "今日份的铁尘",
+  "task_type": "daily",
+  "level_range": {
+    "min": 10,
+    "max": 14
+  },
+  "giver": {
+    "npc_id": "NPC_013"
+  },
+  "prerequisites": [],
+  "objectives": [
+    {
+      "seq": 1,
+      "type": "collect",
+      "target": "ITEM_ORE_02",
+      "count": 6,
+      "area": "MAP_MINE_03"
+    }
+  ],
+  "rewards": [
+    {
+      "type": "gold",
+      "amount": 150
+    },
+    {
+      "type": "exp",
+      "amount": 1050
+    }
+  ],
+  "branches": [],
+  "tags": [
+    "daily",
+    "chapter01",
+    "npc_blacksmith",
+    "mine"
+  ],
+  "provenance": {
+    "request": "给老陈加一条 10 级日常：每天交六块铁尘矿石，炉子不能停。",
+    "evidence": [
+      "wiki:npc_profiles#三、NPC_013 铁匠 老陈",
+      "wiki:world_overview#三、地点与通行",
+      "wiki:quest_design_spec#一、任务类型与结构"
+    ],
+    "model": "handcrafted-wave0",
+    "created_at": "2026-11-14T10:40:00+08:00"
+  }
+}

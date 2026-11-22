@@ -1,0 +1,29 @@
+# 《星港纪元》依赖类约束（C_PREREQ_* / C_DEP_*）
+# 前置任务必须存在、依赖不得成环、前置等级不得倒挂。
+- id: "C_PREREQ_EXISTS_01"
+  scope: "prerequisites[].ref"
+  type: "reference_exists"
+  severity: "error"
+  message: "前置任务 {ref} 不存在"
+  rationale: "任务解锁依赖运行时查表，前置任务缺失会让链条断在半空，玩家永远接不到后续任务。"
+  target: "tasks"
+
+- id: "C_DEP_NO_CYCLE_01"
+  scope: "prerequisites"
+  type: "dependency_order"
+  severity: "error"
+  message: "前置依赖成环或深度超过 {max_depth} 层"
+  rationale: "成环的依赖没有任何拓扑序可解，只能由人工拆链；深度限制则保证主线不会被无限拉长。"
+  params:
+    allow_cycles: false
+    max_depth: 4
+
+- id: "C_DEP_LEVEL_ORDER_01"
+  scope: "prerequisites"
+  type: "dependency_order"
+  severity: "error"
+  message: "前置任务 {ref} 的等级下限 {ref_level} 高于本任务下限 {level}"
+  rationale: "等级倒挂会让刚够等级接任务的玩家卡在不可能完成的前置上，属于典型的数值与流程对不上。"
+  params:
+    order_by: "level_range.min"
+    direction: "nondecreasing"

@@ -1,0 +1,20 @@
+# 《星港纪元》对白类约束（C_DIALOGUE_*）
+# 对白长度守建议区间，编号必须与 NPC 三位号对齐。
+- id: "C_DIALOGUE_LENGTH_01"
+  scope: "dialogue.text"
+  type: "length"
+  severity: "warning"
+  message: "对白长度 {actual} 字超出建议区间 {min}–{max}"
+  rationale: "40–80 字是下环 NPC 一句话的自然长度，超过 120 字在对话框里需要翻页，玩家容易跳过。"
+  params:
+    min: 40
+    max: 120
+
+- id: "C_DIALOGUE_FORMAT_01"
+  scope: "giver.dialogue_ref"
+  type: "regex"
+  severity: "error"
+  message: "对白编号 {dialogue_ref} 格式非法"
+  rationale: "编号与 NPC 三位号对齐后可按 NPC 聚合对白，也让「引用存在」校验能直接从 ID 推出归属人。"
+  params:
+    pattern: '^DLG_\d{3}_\d{2}$'

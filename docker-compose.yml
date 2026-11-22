@@ -1,0 +1,90 @@
+# GameConfig Copilot · Docker Compose（S8-01）
+#
+#   docker compose up --build              # 只起 api（http://127.0.0.1:8000）
+#   docker compose --profile mcp up --build  # 追加 MCP HTTP 服务（8765）
+#
+# 说明
+# ----
+# * api 默认 **write** 模式，只为 5 分钟演示的“确认后落盘”一段；生产/公网请改
+#   `GCC_MCP_MODE=readonly`。端口绑定在 127.0.0.1，不对外网暴露。
+# * 不挂载 ./data（否则会盖住镜像内语料，并带来 Linux 下 uid 10001 的写权限问题）。
+#   演示要看写入结果用 `docker compose cp`，见 README §4。
+# * mcp 服务需要镜像内安装 fastmcp（Py3.11），因此单独 build，默认不启动。
+# * qdrant 只留注释占位：当前 dense = NoopDenseStore，Qdrant adapter 尚未接线。
+
+services:
+  api:
+    build:
+      context: .
+      # 不传 INSTALL_MCP：api 镜像不带 MCP 协议层，启动更快。
+    image: gameconfig-copilot:local
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      GCC_MCP_MODE: ${GCC_MCP_MODE:-write}
+      GCC_LLM_PROVIDER: ${GCC_LLM_PROVIDER:-deepseek}
+      GCC_LLM_MODEL: ${GCC_LLM_MODEL:-deepseek-chat}
+      GCC_LLM_BASE_URL: ${GCC_LLM_BASE_URL:-}
+      GCC_LLM_TIMEOUT_S: ${GCC_LLM_TIMEOUT_S:-30}
+      # 无 key 时保持为空：/healthz 正常，/messages 返回结构化配置错误（不伪造生成）。
+      GCC_LLM_API_KEY: ${GCC_LLM_API_KEY:-}
+      GCC_TASKS_DIR: /app/data/tasks
+      GCC_INDEX_DIR: /app/out/index
+      GCC_TRACE_PATH: /app/traces/traces.jsonl
+    volumes:
+      # 轨迹持久化；data/ 留在容器内（见文件头说明）。
+      - traces:/app/traces
+    restart: unless-stopped
+    # healthcheck 继承 Dockerfile：GET /healthz（标准库 urllib，无需 curl）。
+
+  # 可选：MCP 工具服务（只读、streamable HTTP）。
+  # 需要 fastmcp：镜像通过 build arg INSTALL_MCP=true 安装。
+  mcp:
+    profiles: ["mcp"]
+    build:
+      context: .
+      args:
+        INSTALL_MCP: "true"
+    image: gameconfig-copilot:mcp
+    command:
+      - python
+      - -m
+      - gameconfig_copilot.mcp_server.server
+      - --mode
+      - readonly
+      - --transport
+      - http
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8765"
+    ports:
+      - "127.0.0.1:8765:8765"
+    environment:
+      GCC_LLM_PROVIDER: ${GCC_LLM_PROVIDER:-deepseek}
+      GCC_LLM_MODEL: ${GCC_LLM_MODEL:-deepseek-chat}
+      GCC_LLM_API_KEY: ${GCC_LLM_API_KEY:-}
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import socket,sys; s=socket.create_connection(('127.0.0.1',8765),3); s.close()"
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+
+  # Qdrant 占位（S7 迁移目标）：当前 dense 分支是 NoopDenseStore，放开也不会被使用。
+  # qdrant:
+  #   image: qdrant/qdrant:v1.12.4
+  #   ports:
+  #     - "127.0.0.1:6333:6333"
+  #   volumes:
+  #     - qdrant_data:/qdrant/storage
+  #   restart: unless-stopped
+
+volumes:
+  traces:
+  # qdrant_data:

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "task_id": "T_SIDE_0217",
+  "title": "铁匠的委托：矿洞铁尘",
+  "task_type": "side",
+  "level_range": {
+    "min": 6,
+    "max": 9
+  },
+  "giver": {
+    "npc_id": "NPC_013",
+    "dialogue_ref": "DLG_013_03"
+  },
+  "prerequisites": [
+    {
+      "type": "task_completed",
+      "ref": "T_MAIN_0102"
+    }
+  ],
+  "objectives": [
+    {
+      "seq": 1,
+      "type": "talk_to",
+      "target": "NPC_013",
+      "count": 1,
+      "area": "MAP_STARPORT_01"
+    },
+    {
+      "seq": 2,
+      "type": "collect",
+      "target": "ITEM_ORE_02",
+      "count": 4,
+      "area": "MAP_MINE_03"
+    }
+  ],
+  "rewards": [
+    {
+      "type": "gold",
+      "amount": 90,
+      "item_id": null
+    },
+    {
+      "type": "exp",
+      "amount": 600,
+      "item_id": null
+    }
+  ],
+  "branches": [],
+  "tags": [
+    "side",
+    "chapter01",
+    "npc_blacksmith",
+    "mine"
+  ],
+  "provenance": {
+    "request": "给铁匠老陈加一条 6 级支线，去矿洞捡 4 块矿石，奖励别太高",
+    "evidence": [
+      "wiki:npc_profiles#六、NPC 索引",
+      "wiki:npc_profiles#三、NPC_013 铁匠 老陈",
+      "wiki:world_overview#五、实体索引",
+      "wiki:quest_design_spec#四、ID 命名规则",
+      "task:T_SIDE_0213#task"
+    ],
+    "model": "deepseek-chat",
+    "created_at": "2026-11-19T16:34:51.149000+08:00"
+  }
+}

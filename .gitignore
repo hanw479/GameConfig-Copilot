@@ -1,0 +1,49 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# ---------- 环境与密钥 ----------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ---------- 运行产物 ----------
+data/index/
+data/backups/
+data/memory/
+traces/
+logs/
+*.log
+out/
+tmp/
+*.sqlite3
+*.db
+
+# ---------- 评测产物 ----------
+/reports/
+*.report.json
+
+# ---------- 演示交付 ----------
+# 视频二进制不入库；demo/README.md 与 demo/reports/*.json 仍然提交
+demo/recording/*.mp4
+
+# ---------- 编辑器 / 系统 ----------
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+.dshsuper-agent.json

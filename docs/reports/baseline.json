@@ -1,0 +1,95 @@
+{
+  "suite": "combined",
+  "baseline_version": 2,
+  "status": "partial",
+  "generated_at": "2026-11-18T18:57:49+08:00",
+  "labels": [
+    "retrieval: measured",
+    "agent: measured 2026-11-18 (FPVR 0.913, real LLM)",
+    "ragas: pending ragas installation",
+    "cost/latency: measured 2026-11-18 (agent run)"
+  ],
+  "notes": [
+    "检索基线为 BM25-only（dense backend = noop），不是 hybrid RAG 的最终形态。",
+    "Agent FPVR 于 2026-11-18 用真实 DeepSeek 跑 30 条 requests_v2（20/5/5），21/23 首轮通过。",
+    "奖励下限约束 C_REWARD_GOLD_MIN_01 / C_REWARD_EXP_MIN_01 已加入 data/constraints，黄金集下限断言恢复为硬断言。",
+    "Ragas 未安装，未产出分数；未安装时 harness 抛 RagasUnavailable。",
+    "单次成本按每条黄金样本摊销（0.016232 CNY）；按带 LLM 调用的 trace 摊销为 0.014323 CNY。",
+    "阈值：FPVR -3pt / Recall@5 -2pt / 单次成本 +20% 触发 compare.py 退出码 1。"
+  ],
+  "suites": {
+    "retrieval": {
+      "suite": "retrieval",
+      "status": "ok",
+      "generated_at": "2026-11-18T19:00:40+08:00",
+      "chunk_count": 81,
+      "metrics": {
+        "recall@1": 0.375,
+        "hit@1": 0.6,
+        "recall@5": 0.775,
+        "hit@5": 0.95,
+        "recall@10": 0.875,
+        "hit@10": 0.95,
+        "mrr@10": 0.7625,
+        "ndcg@10": 0.7382,
+        "source_type_precision@10": 0.73
+      },
+      "config": {
+        "top_k": 10,
+        "ks": [1, 5, 10],
+        "mrr_cutoff": 10,
+        "n_queries": 20
+      },
+      "retriever": {
+        "sparse_backend": "bm25s",
+        "dense_backend": "noop",
+        "dense_available": false,
+        "candidate_k": 30,
+        "fusion_k": 60
+      },
+      "qrels": {
+        "path": "data/golden/qrels.json",
+        "version": 2,
+        "distribution": {
+          "count": 20,
+          "relevant_labels": 34,
+          "multi_label_queries": 14
+        }
+      }
+    },
+    "agent": {
+      "suite": "agent",
+      "suite_version": "requests_v2",
+      "status": "ok",
+      "generated_at": "2026-11-18T18:57:49+08:00",
+      "mode": "custom_validator",
+      "model": "deepseek-chat",
+      "metrics": {
+        "fpvr": 0.913,
+        "post_repair_pass_rate": 1.0,
+        "mean_repair_rounds": 0.1304,
+        "block_rate": 0.4286,
+        "dangerous_block_rate": 1.0,
+        "p95_latency_ms": 4083.0,
+        "cost_per_run_cny": 0.016232
+      },
+      "denominators": {
+        "total": 30,
+        "expected_pass": 23,
+        "expected_block": 7
+      },
+      "reward_lower_bounds": {
+        "status": "enforced",
+        "rule": "level_band_range",
+        "constraints": ["C_REWARD_GOLD_MIN_01", "C_REWARD_EXP_MIN_01"],
+        "gold": {"max_level_10": 60, "max_level_20": 150, "max_level_30": 360},
+        "exp": {"max_level_10": 480, "max_level_20": 1200, "max_level_30": 2880}
+      }
+    }
+  },
+  "pending": {
+    "agent": "FPVR 已测（2026-11-18，0.913）；Ragas 与成本回归门仍需后续波次接入。",
+    "ragas": "安装 ragas + langchain-openai 后运行 ragas_eval，judge 固定 deepseek-chat@2026-11-01。",
+    "observability": "轨迹已补 llm.* span 的 provider/model/tokens/cost；运行 run_observability_summary 产出一致性汇总。"
+  }
+}
